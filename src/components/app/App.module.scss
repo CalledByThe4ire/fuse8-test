@@ -1,10 +1,21 @@
+@import "~include-media/dist/include-media";
 @import "../../styles/mixins";
+@import "../../styles/variables";
 
 .App {
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
   width: inherit;
+  min-width: calc(#{map-get($map: $breakpoints, $key: phone)} / 2);
+  max-width: map-get($map: $breakpoints, $key: desktop);
   height: inherit;
+  margin: auto;
+
+  &Container {
+    @include margin-x(-11px);
+
+    @include media("<=phone") {
+      @include margin-x(auto);
+    }
+  }
 }

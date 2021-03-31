@@ -15,13 +15,13 @@ export const createAction = (type, payload) => {
   };
 };
 
-export const createReduxThunkAction = (func, type) => {
+export const fetchData = ({ fetchHomes }, type) => {
   return async (dispatch) => {
     dispatch(createAction(actions.SET_LOADING));
 
-    const payload = await func();
+    const payload = await fetchHomes();
 
-    return dispatch(createAction(type, payload));
+    return dispatch(createAction(actions.GET_ITEMS, payload));
   };
 };
 

@@ -1,0 +1,101 @@
+@import "~include-media/dist/include-media";
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.Card {
+  display: flex;
+  flex-flow: column wrap;
+  width: 379px;
+  height: 100%;
+  text-align: left;
+  background-color: #f8f8f8;
+  border: 1px solid #d8d8d8;
+
+  @include media("<=phone") {
+    width: 100%;
+  }
+
+  @include media(">phone", "<=tablet") {
+    width: 288px;
+  }
+
+  &Inner {
+    position: relative;
+    display: flex;
+  }
+
+  &Image {
+    object-fit: cover;
+    object-position: top center;
+
+    @include media("<=tablet") {
+      width: 100%;
+    }
+  }
+
+  &Info {
+    padding: 20px;
+  }
+
+  &Label {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+
+    @include padding-y(6px);
+    @include padding-x(10px);
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    color: #fff;
+
+    &Primary {
+      background-color: $primary;
+    }
+
+    &Secondary {
+      background-color: $secondary;
+    }
+  }
+
+  &Title,
+  &Address,
+  &Note {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  &Title {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #363636;
+  }
+
+  &Address {
+    margin-bottom: 18px;
+  }
+
+  &Address,
+  &Price {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  &Price {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  &Note {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+}
