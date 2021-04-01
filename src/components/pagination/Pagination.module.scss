@@ -1,0 +1,51 @@
+@import "~include-media/dist/include-media";
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.Pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  transition: all 0.3s ease-in-out;
+
+  @include media(">phone", "<=tablet") {
+    margin-top: 45px;
+  }
+
+  @include media("<=phone") {
+    margin-top: 25px;
+  }
+
+  &Btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+
+    @include padding-x(32px);
+    @include padding-y(16px);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    color: #363636;
+    cursor: not-allowed;
+    border: 1px solid #d8d8d8;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+
+    @include media("<=phone") {
+      @include padding-x(24px);
+      @include padding-y(16px);
+
+      font-size: 14px;
+    }
+
+    span {
+      display: inline-flex;
+      padding-right: 5px;
+    }
+  }
+}

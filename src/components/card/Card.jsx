@@ -7,9 +7,9 @@ import _ from 'lodash';
 
 import styles from './Card.module.scss';
 
-const Card = ({ title, address, type, price }) => {
+const Card = ({ id, title, address, type, price }) => {
   return (
-    <Link to="/" className={styles.CardLink}>
+    <Link to={`/details/${id}`} className={styles.CardLink}>
       <div className={styles.Card}>
         <div className={styles.CardInner}>
           <img

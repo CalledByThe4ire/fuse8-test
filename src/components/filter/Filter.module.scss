@@ -1,5 +1,6 @@
 @import "~include-media/dist/include-media";
 @import "../../styles/_mixins.scss";
+@import "../../styles/variables";
 
 .Filter {
   display: flex;
@@ -29,6 +30,10 @@
     line-height: 24px;
     color: #363636;
     transition: all 0.3s ease-in-out;
+
+    @include media("<=phone") {
+      font-size: 14px;
+    }
   }
 
   &Input {

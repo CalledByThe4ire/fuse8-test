@@ -19,6 +19,7 @@ import { reducer, StoreContext, actions, fetchData } from '../../reducer';
 import { api } from '../../api';
 import Card from '../card';
 import Filter from '../filter';
+import Pagination from '../pagination';
 
 const middleware = [thunk];
 
@@ -99,7 +100,7 @@ const App = ({ title }) => {
                                 const { id, ...props } = value;
                                 return (
                                   <Col sm={6} md={6} lg={4} key={id}>
-                                    <Card {...props} />
+                                    <Card id={id} {...props} />
                                   </Col>
                                 );
                               })}
@@ -109,6 +110,7 @@ const App = ({ title }) => {
                       );
                     }}
                   />
+                  <Pagination />
                 </div>
               </Container>
             </ScreenClassProvider>
