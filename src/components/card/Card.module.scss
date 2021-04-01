@@ -100,4 +100,11 @@
     font-weight: 400;
     line-height: 1.2;
   }
+
+  &Link {
+    &:any-link {
+      color: #363636;
+      text-decoration: none;
+    }
+  }
 }
