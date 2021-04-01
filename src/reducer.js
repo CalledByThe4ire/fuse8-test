@@ -15,13 +15,13 @@ export const createAction = (type, payload) => {
   };
 };
 
-export const fetchData = ({ fetchHomes }, type) => {
+export const fetchData = (func, type) => {
   return async (dispatch) => {
     dispatch(createAction(actions.SET_LOADING));
 
-    const payload = await fetchHomes();
+    const payload = await func();
 
-    return dispatch(createAction(actions.GET_ITEMS, payload));
+    return dispatch(createAction(type, payload));
   };
 };
 

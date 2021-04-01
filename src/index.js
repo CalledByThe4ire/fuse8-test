@@ -11,7 +11,7 @@ import App from './components/app';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App title="Our Latest Developments"/>
   </React.StrictMode>,
   document.getElementById('root')
 );

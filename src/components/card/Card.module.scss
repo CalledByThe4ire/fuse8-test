@@ -10,6 +10,7 @@
   text-align: left;
   background-color: #f8f8f8;
   border: 1px solid #d8d8d8;
+  transition: all 0.3s ease-in-out;
 
   @include media("<=phone") {
     width: 100%;
@@ -27,6 +28,7 @@
   &Image {
     object-fit: cover;
     object-position: top center;
+    transition: all 0.3s ease-in-out;
 
     @include media("<=tablet") {
       width: 100%;

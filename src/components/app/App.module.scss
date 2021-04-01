@@ -4,15 +4,53 @@
 
 .App {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
+  align-items: flex-start;
   width: inherit;
   min-width: calc(#{map-get($map: $breakpoints, $key: phone)} / 2);
   max-width: map-get($map: $breakpoints, $key: desktop);
-  height: inherit;
+  padding-top: 36px;
   margin: auto;
+
+  &Title {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 50px;
+
+    @include margin-x(auto);
+
+    font-size: 36px;
+    line-height: 1.2;
+    color: #45852d;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+
+    @include media(">phone", "<=tablet") {
+      margin-bottom: 35px;
+      font-size: 32px;
+    }
+
+    @include media("<=phone") {
+      margin-bottom: 30px;
+      font-size: 30px;
+    }
+  }
+
+  &Alert {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: lightcoral;
+
+    @include margin-x(auto);
+  }
 
   &Container {
     @include margin-x(-11px);
+
+    transition: all 0.3s ease-in-out;
 
     @include media("<=phone") {
       @include margin-x(auto);

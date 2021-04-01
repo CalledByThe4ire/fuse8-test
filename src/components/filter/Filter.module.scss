@@ -1,0 +1,65 @@
+@import "~include-media/dist/include-media";
+@import "../../styles/_mixins.scss";
+
+.Filter {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 45px;
+  transition: all 0.3s ease-in-out;
+
+  @include media(">tablet", "<=desktop") {
+    margin-bottom: 35px;
+  }
+
+  @include media(">phone", "<=tablet") {
+    margin-bottom: 25px;
+  }
+
+  @include media("<=phone") {
+    margin-bottom: 25px;
+    font-size: 30px;
+  }
+
+  &Label {
+    padding-right: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #363636;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &Input {
+    min-width: 35%;
+    min-height: 50px;
+    font-size: 14px;
+    line-height: 1;
+    color: #363636;
+    border: 1px solid #d8d8d8;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+
+    @include padding-x(15px);
+    @include padding-y(10px);
+
+    @include media(">tablet", "<=desktop") {
+      min-width: 50%;
+    }
+
+    @include media(">phone", "<=tablet") {
+      flex-grow: 1;
+      min-height: 35px;
+      padding-right: 12px;
+      font-size: 14px;
+    }
+
+    @include media("<=phone") {
+      flex-grow: 1;
+      min-height: 20px;
+      padding-right: 10px;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   setConfiguration,
   ScreenClassProvider,
@@ -13,15 +14,10 @@ import _ from 'lodash';
 
 import styles from './App.module.scss';
 import initialState from '../../initialState';
-import {
-  reducer,
-  StoreContext,
-  createAction,
-  actions,
-  fetchData,
-} from '../../reducer';
+import { reducer, StoreContext, actions, fetchData } from '../../reducer';
 import { api } from '../../api';
 import Card from '../card';
+import Filter from '../filter';
 
 const middleware = [thunk];
 
@@ -45,63 +41,83 @@ const searchItems = (items, search) => {
   });
 };
 
-const App = () => {
+const App = ({ title }) => {
   const [state, dispatch] = useMiddlewareReducer(
     reducer,
     initialState,
     middleware
   );
+
+  useEffect(() => {
+    dispatch(fetchData(api.fetchHomes, actions.GET_ITEMS));
+  }, [dispatch]);
+
   return (
     <StoreContext.Provider value={{ dispatch, state }}>
       <div className={styles.App}>
-        <ScreenClassProvider>
-          <Container style={{ width: 'inherit' }}>
-            <div className={styles.AppContainer}>
-              <ScreenClassRender
-                render={(screenClass) => {
-                  return _.chunk(
-                    searchItems(state.items, ''),
-                    screenClass === 'lg'
-                      ? 3
-                      : screenClass === 'md' || screenClass === 'sm'
-                      ? 2
-                      : 1
-                  ).map((chunk, index, array) => {
+        <h1 className={styles.AppTitle}>{title}</h1>
+        {state.items.length === 0 ? (
+          <p className={styles.AppAlert}>There is no items to work with</p>
+        ) : (
+          <ScreenClassProvider>
+            <Container style={{ width: 'inherit', marginBottom: '60px' }}>
+              <div className={styles.AppContainer}>
+                <Filter />
+                <ScreenClassRender
+                  render={(screenClass) => {
                     return (
-                      <Row
-                        style={{
-                          marginBottom: `${
-                            index === array.length - 1
-                              ? 0
-                              : `${
-                                  screenClass === 'sm' || screenClass === 'xs'
-                                    ? '11px'
-                                    : screenClass === 'md'
-                                    ? '22px'
-                                    : '38px'
-                                }`
-                          }`,
-                        }}
-                      >
-                        {chunk.map((value) => {
-                          const { id, ...props } = value;
-                          return (
-                            <Col sm={6} md={6} lg={4} key={id}>
-                              <Card {...props} />
-                            </Col>
-                          );
-                        })}
-                      </Row>
+                      !state.isLoading &&
+                      _.chunk(
+                        searchItems(state.items, state.search),
+                        screenClass === 'lg'
+                          ? 3
+                          : screenClass === 'md' || screenClass === 'sm'
+                          ? 2
+                          : 1
+                      ).map((chunk, index, array) => {
+                        return (
+                          <Row
+                            key={index}
+                            style={{
+                              marginBottom: `${
+                                index === array.length - 1
+                                  ? 0
+                                  : `${
+                                      screenClass === 'sm' ||
+                                      screenClass === 'xs'
+                                        ? '11px'
+                                        : screenClass === 'md'
+                                        ? '22px'
+                                        : '38px'
+                                    }`
+                              }`,
+                            }}
+                          >
+                            {chunk.map((value) => {
+                              const { id, ...props } = value;
+                              return (
+                                <Col sm={6} md={6} lg={4} key={id}>
+                                  <Card {...props} />
+                                </Col>
+                              );
+                            })}
+                          </Row>
+                        );
+                      })
                     );
-                  });
-                }}
-              />
-            </div>
-          </Container>
-        </ScreenClassProvider>
+                  }}
+                />
+              </div>
+            </Container>
+          </ScreenClassProvider>
+        )}
       </div>
     </StoreContext.Provider>
   );
+};
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default App;
